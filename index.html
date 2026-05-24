@@ -81,18 +81,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 4rem;
-    background: rgba(255,255,255,0.92);
+    background: rgba(0, 0, 0, 0.78);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(0,0,0,0.06);
   }
-  .nav-logo {
-    font-size: 1rem;
-    font-weight: 900;
-    letter-spacing: 0.12em;
-    color: var(--deep);
-    text-transform: uppercase;
-  }
-  .nav-logo span { color: var(--blaze); }
   .nav-links {
     display: flex;
     gap: 2.5rem;
@@ -103,7 +95,7 @@
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--deep);
+    color: var(--light-gray);
     text-decoration: none;
     opacity: 0.6;
     transition: opacity 0.2s;
@@ -118,6 +110,16 @@
     background: var(--blaze);
     padding: 0.4rem 1rem;
     border-radius: 2px;
+  }
+  .nav-tag a,
+  .nav-tag a:active,
+  .nav-tag a:focus {
+    color: #fff;
+    text-decoration: none;
+  }
+  .nav-tag a:hover{
+    color: var(--deep);
+    text-decoration: none;
   }
 
   /* ── HERO ── */
@@ -688,14 +690,11 @@
   .mockup-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2px;
     margin-top: 4rem;
   }
   .mockup-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 2px;
   }
   .mockup-item {
     position: relative;
@@ -712,23 +711,78 @@
     flex-direction: column;
     gap: 0.75rem;
     position: relative;
+    overflow: hidden;
+  }
+  .mockup-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .mockup-img.tall { aspect-ratio: 3/4; }
   .mockup-img.wide { aspect-ratio: 16/7; }
   .mockup-img.sq { aspect-ratio: 1/1; }
   .mockup-bg-1 { background: linear-gradient(135deg, #F0EDE8, #E5E0D8); }
-  .mockup-bg-2 { background: linear-gradient(135deg, #083046, #0D4A6B); }
-  .mockup-bg-3 { background: linear-gradient(135deg, #F26419, #FB8500); }
-  .mockup-bg-4 { background: linear-gradient(135deg, #E8F4F8, #CCE8F4); }
-  .mockup-bg-5 { background: linear-gradient(135deg, #1A1A1A, #2D2D2D); }
-  .mockup-bg-6 { background: linear-gradient(135deg, #F8F6F2, #EEEBE4); }
-  .mockup-caption {
+  .mockup-bg-2 { background: linear-gradient(135deg, #F0EDE8, #E5E0D8); }
+  .mockup-bg-3 { background: linear-gradient(135deg, #F0EDE8, #E5E0D8); }
+  .mockup-bg-4 { background: linear-gradient(135deg, #F0EDE8, #E5E0D8); }
+  .mockup-bg-5 { background: linear-gradient(135deg, #F0EDE8, #E5E0D8); }
+  .mockup-bg-6 { background: linear-gradient(135deg, #F0EDE8, #E5E0D8); }
+  .mockup-caption-1 {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     padding: 1rem 1.25rem;
     background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mockup-caption-2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.25rem;
+    background: rgba(0, 67, 115, 0.717);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mockup-caption-3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.25rem;
+    background: rgba(210, 109, 2, 0.955);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mockup-caption-4 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.25rem;
+    background: rgba(0, 147, 176, 0.717);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mockup-caption-5 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.25rem;
+    background: rgba(184, 123, 0, 0.717);
     backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
@@ -784,11 +838,22 @@
   .web-section {
     background: var(--white);
     padding: 8rem 7rem;
+    padding-bottom: 0rem;
   }
   .web-frame {
     margin-top: 4rem;
-    border: 1px solid var(--light-gray);
-    overflow: hidden;
+    border: none;
+    overflow: visible;
+    position: relative;
+    z-index: 50;
+    transform: translateY(-10rem);
+  }
+  .web-frame img {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    object-fit: cover;
+    display: block;
   }
   .browser-bar {
     background: #F5F5F5;
@@ -832,13 +897,7 @@
     padding-bottom: 1.5rem;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
-  .web-nav-logo {
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: white;
-    letter-spacing: 0.1em;
-  }
-  .web-nav-logo span { color: var(--blaze); }
+ 
   .web-nav-links {
     display: flex;
     gap: 2rem;
@@ -1051,7 +1110,7 @@
   .mat-spec {
     font-size: 0.7rem;
     font-weight: 700;
-    color: var(--blaze);
+    color: var(--blue-green);
     margin-bottom: 0.75rem;
     letter-spacing: 0.05em;
   }
@@ -1283,69 +1342,21 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo"><span>L</span>INDJAN</div>
   <ul class="nav-links">
     <li><a href="#challenge">El Repte</a></li>
     <li><a href="#identity">Identitat</a></li>
     <li><a href="#mockups">Peces</a></li>
     <li><a href="#impact">Impacte</a></li>
   </ul>
-  <div class="nav-tag">Case Study</div>
+  <div class="nav-tag"><a href="https://drive.google.com/drive/folders/1Dx297bSrEXmKyuZgH29T2sKNeL2IJ0NX?usp=sharing" target="_blank" rel="noopener noreferrer">carpeta drive</a></div>
 </nav>
 
 <!-- ══════════════════════════════ HERO ══════════════════════════════ -->
 <section class="hero">
-  <div class="hero-energy-lines"></div>
-  <div class="hero-bg-accent"></div>
 
-  <div class="hero-left">
-    <div class="hero-eyebrow">
-      <div class="hero-eyebrow-line"></div>
-      <span class="hero-eyebrow-text">Brand Identity &amp; Digital Transformation</span>
-    </div>
 
-    <h1 class="headline-xl hero-title">
-      LIND<span class="accent">JAN</span><br>
-      S.L.
-    </h1>
 
-    <p class="hero-subtitle">
-      De la identitat provisional a la imatge d'una gran corporació energètica. Un cas d'estudi sobre com el disseny estratègic transforma empreses reals.
-    </p>
-
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <span class="label">Sector</span>
-        <span class="value">Instal·lacions Energètiques</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="label">Àmbit</span>
-        <span class="value">Catalunya · PIME</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="label">Tipologia</span>
-        <span class="value">Branding + Ecodisseny</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="hero-image-frame">
-      <div class="hero-img-placeholder">
-        <div class="placeholder-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-            <polyline points="21,15 16,10 5,21"/>
-          </svg>
-        </div>
-        <span class="placeholder-label">Hero Mockup</span>
-      </div>
-      <div class="hero-img-badge">
-        <div class="num">2025</div>
-        <div class="sub">Projecte</div>
-      </div>
-    </div>
-  </div>
+  
 
   <div class="hero-scroll-hint">
     <span class="label">Scroll</span>
@@ -1366,12 +1377,12 @@
   <div class="challenge-grid">
     <div class="challenge-text">
       <div class="challenge-body">
-        <p class="body-lg">Lindjan S.L. és una PIME fundada el 2018 especialitzada en instal·lacions energètiques integrals —calefacció, gas, aire condicionat, tractament d'aigüa, i eficiència energètica. Un equip tècnic d'alta qualificació, però atrapada en una paradoxa greu: mentre els seus serveis eren impecables, la seva presència al mercat era pràcticament inexistent.</p>
+        <p class="body-lg">LINDJAN és una PIME fundada el 2018 especialitzada en instal·lacions energètiques integrals —calefacció, gas, aire condicionat, tractament d'aigüa, i eficiència energètica. Un equip tècnic d'alta qualificació, però atrapada en una paradoxa greu: mentre els seus serveis eren impecables, la seva presència al mercat era pràcticament inexistent.</p>
       </div>
 
       <div class="challenge-quote">
         <p>"Falta de visibilitat i identitat corporativa clara, limitant el creixement i prestigi de l'empresa."</p>
-        <cite>Josep Jané, Responsable de Lindjan S.L.</cite>
+        <cite>Josep Jané, Responsable de LINDJAN S.L.</cite>
       </div>
     </div>
 
@@ -1550,40 +1561,18 @@
   <div class="mockup-grid-2">
     <div class="mockup-item">
       <div class="mockup-img mockup-bg-1 card-sim">
-        <div class="biz-card">
-          <div class="biz-card-top">
-            <svg class="biz-logo-icon" viewBox="0 0 28 28" fill="none">
-              <path d="M14 2L24 8V20L14 26L4 20V8L14 2Z" stroke="#F26419" stroke-width="1.2" fill="none"/>
-              <path d="M14 7L20 10.5V17.5L14 21L8 17.5V10.5L14 7Z" fill="#F26419" opacity="0.25"/>
-              <path d="M14 11L17 12.75V16.25L14 18L11 16.25V12.75L14 11Z" fill="#F26419"/>
-            </svg>
-            <span class="biz-brand">LINDJAN</span>
-          </div>
-          <div class="biz-divider"></div>
-          <div class="biz-name">Verònica Lindner</div>
-          <div class="biz-role">Gestió &amp; Atenció al Client</div>
-          <div class="biz-contact">
-            <div class="biz-line"><div class="biz-dot"></div>+34 629 184 016</div>
-            <div class="biz-line"><div class="biz-dot"></div>lindjan@gmail.com</div>
-            <div class="biz-line"><div class="biz-dot"></div>www.lindjan.com</div>
-          </div>
-        </div>
+        <img src="/img/mockup1.png" alt="Mockup 1" />
       </div>
-      <div class="mockup-caption">
-        <span class="mockup-caption-name">Tríptic informatiu</span>
+      <div class="mockup-caption-1">
+        <span class="mockup-caption-name">Web corporativa</span>
       </div>
     </div>
     <div class="mockup-item">
       <div class="mockup-img mockup-bg-2">
-        <div class="ph-inner" style="color:rgba(255,255,255,0.3)">
-          <div class="ph-icon" style="border-color:rgba(255,255,255,0.3)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-          </div>
-          <span class="ph-text">Sobre corporatiu</span>
-        </div>
+        <img src="/img/mockup2.png" alt="Mockup 1" />
       </div>
-      <div class="mockup-caption">
-        <span class="mockup-caption-name">Sobre i paper de carta</span>
+      <div class="mockup-caption-2">
+        <span class="mockup-caption-name">Tríptic informatiu</span>
       </div>
     </div>
   </div>
@@ -1591,41 +1580,28 @@
   <div class="mockup-grid-3">
     <div class="mockup-item">
       <div class="mockup-img mockup-bg-3">
-        <div class="ph-inner" style="color:rgba(255,255,255,0.4)">
-          <div class="ph-icon" style="border-color:rgba(255,255,255,0.4)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-          </div>
-          <span class="ph-text">Tríptic DL</span>
-        </div>
+        <img src="/img/mockup3.png" alt="Mockup 1" />">
+        
       </div>
-      <div class="mockup-caption">
-        <span class="mockup-caption-name">Tríptic de serveis DL</span>
+      <div class="mockup-caption-3">
+        <span class="mockup-caption-name">xarxes socials</span>
       </div>
     </div>
     <div class="mockup-item">
       <div class="mockup-img mockup-bg-4">
-        <div class="ph-inner" style="color:rgba(8,48,70,0.35)">
-          <div class="ph-icon" style="border-color:rgba(8,48,70,0.35)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-          </div>
-          <span class="ph-text">Pressupost PDF</span>
-        </div>
+        <img src="/img/mockup4.png" alt="Mockup 1" />">
+        
       </div>
-      <div class="mockup-caption">
-        <span class="mockup-caption-name">Plantilla de pressupost</span>
+      <div class="mockup-caption-4">
+        <span class="mockup-caption-name">Manual d'estil</span>
       </div>
     </div>
     <div class="mockup-item">
       <div class="mockup-img mockup-bg-5">
-        <div class="ph-inner" style="color:rgba(255,255,255,0.25)">
-          <div class="ph-icon" style="border-color:rgba(255,255,255,0.25)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-          </div>
-          <span class="ph-text">Guia manteniment</span>
-        </div>
+        <img src="/img/mockup5.png" alt="Mockup 1" />
       </div>
-      <div class="mockup-caption">
-        <span class="mockup-caption-name">Guia manteniment eficient</span>
+      <div class="mockup-caption-5">
+        <span class="mockup-caption-name">targeta de presentació</span>
       </div>
     </div>
   </div>
@@ -1641,41 +1617,12 @@
     </div>
   </div>
 
-  <p class="body-lg" style="max-width:600px;margin-bottom:4rem;">
+  <p class="body-lg" style="max-width:600px;">
     La web corporativa de Lindjan respon a la necessitat més urgent detectada: tenir una porta d'entrada professional al negoci. Dissenyada per convertir visites en consultes, amb formulari integrat, Google Maps i portafoli de treballs reals.
   </p>
 
   <div class="web-frame">
-    <div class="browser-bar">
-      <div class="browser-dots">
-        <div class="browser-dot bd-red"></div>
-        <div class="browser-dot bd-yellow"></div>
-        <div class="browser-dot bd-green"></div>
-      </div>
-      <div class="browser-url">www.lindjan.com</div>
-    </div>
-    <div class="web-content">
-      <div class="web-nav-sim">
-        <div class="web-nav-logo"><span>L</span>INDJAN</div>
-        <div class="web-nav-links">
-          <a href="#">Serveis</a>
-          <a href="#">Projectes</a>
-          <a href="#">Contacte</a>
-          <a href="#">Blog</a>
-        </div>
-      </div>
-      <div class="web-hero-text">
-        <h2>Instal·lacions<br><span>Energètiques</span><br>de confiança</h2>
-        <p>Calefacció, gas, climatització i eficiència energètica per a empreses i particulars a Catalunya. Pressupost gratuït en 24h.</p>
-        <div class="web-cta">Demana pressupost →</div>
-      </div>
-      <div class="web-placeholder-img">
-        <div class="ph-icon" style="border-color:rgba(255,255,255,0.2)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-        </div>
-        <span class="placeholder-label">Foto treballs reals</span>
-      </div>
-    </div>
+    <img src="/img/web.png" alt="Web mockup" />
   </div>
 </div>
 
@@ -1776,12 +1723,7 @@
 
   <div class="vehicle-showcase">
     <div class="vehicle-main">
-      <div class="ph-inner" style="color:rgba(255,255,255,0.15)">
-        <div class="ph-icon" style="border-color:rgba(255,255,255,0.15)">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-        </div>
-        <span class="ph-text">Mockup vehicle — Vista lateral</span>
-      </div>
+      
       <span class="vehicle-label" style="color:rgba(255,255,255,0.18);">Vista lateral furgoneta principal</span>
     </div>
   </div>
