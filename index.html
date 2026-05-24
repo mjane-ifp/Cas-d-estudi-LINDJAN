@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINDJAN — Cas d'estudi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blaze: #F26419;
+    --princeton: #FB8500;
+    --amber: #FFB703;
+    --deep: #083046;
+    --blue-green: #219EBC;
+    --sunset: #8ECAE6;
+    --white: #FFFFFF;
+    --off-white: #F8F8F6;
+    --light-gray: #EFEFEF;
+    --mid-gray: #999;
+    --dark: #0D0D0D;
+    --text: #1A1A1A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .headline-xl {
+    font-size: clamp(3rem, 9vw, 9rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+  .headline-lg {
+    font-size: clamp(2rem, 5vw, 5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .headline-md {
+    font-size: clamp(1.4rem, 3vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .label {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+  .body-lg {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.75;
+    color: #444;
+  }
+  .body-sm {
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: #666;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-logo {
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: var(--deep);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--blaze); }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--deep);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--blaze);
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--deep);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+  }
+
+  .hero-energy-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .hero-energy-lines::before {
+    content: '';
+    position: absolute;
+    width: 140%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blaze), var(--amber), transparent);
+    top: 38%;
+    left: -20%;
+    opacity: 0.4;
+    transform: rotate(-8deg);
+  }
+  .hero-energy-lines::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-green), var(--sunset), transparent);
+    top: 65%;
+    left: 0;
+    opacity: 0.3;
+    transform: rotate(-8deg);
+  }
+
+  .hero-bg-accent {
+    position: absolute;
+    right: -10%;
+    top: -10%;
+    width: 55%;
+    height: 120%;
+    background: linear-gradient(135deg, rgba(242,100,25,0.12) 0%, rgba(33,158,188,0.08) 100%);
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 7rem;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .hero-eyebrow-line {
+    width: 2.5rem;
+    height: 2px;
+    background: var(--blaze);
+  }
+  .hero-eyebrow-text {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blaze);
+  }
+  .hero-title {
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .accent { color: var(--blaze); }
+  .hero-subtitle {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    max-width: 400px;
+    margin-bottom: 3rem;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 3rem;
+  }
+  .hero-meta-item {}
+  .hero-meta-item .label { color: rgba(255,255,255,0.35); margin-bottom: 0.3rem; display: block; }
+  .hero-meta-item .value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 5rem 6rem 2rem;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-image-frame {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 4/5;
+    position: relative;
+  }
+  .hero-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-img-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(242,100,25,0.15), rgba(33,158,188,0.08));
+  }
+  .placeholder-icon {
+    width: 3rem;
+    height: 3rem;
+    border: 1px dashed rgba(255,255,255,0.25);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  .placeholder-icon svg { opacity: 0.3; }
+  .placeholder-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    position: relative;
+    z-index: 1;
+  }
+  .hero-img-badge {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    background: var(--blaze);
+    padding: 1.2rem;
+    min-width: 120px;
+    text-align: center;
+  }
+  .hero-img-badge .num {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+  }
+  .hero-img-badge .sub {
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-top: 0.2rem;
+  }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 5;
+  }
+  .hero-scroll-hint .label { color: rgba(255,255,255,0.3); }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.6); opacity: 0.4; }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 8rem 7rem;
+  }
+  .section-narrow {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 8rem 7rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 4rem;
+    margin-bottom: 5rem;
+  }
+  .section-number {
+    font-size: 7rem;
+    font-weight: 900;
+    color: #8ecae67d;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: -1rem;
+  }
+  .section-title-block {}
+  .section-label { display: block; margin-bottom: 0.75rem; }
+
+  /* ── CHALLENGE ── */
+  .challenge {
+    background: var(--off-white);
+    padding: 8rem 7rem;
+  }
+  .challenge-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .challenge-text {}
+  .challenge-eyebrow { margin-bottom: 1.5rem; }
+  .challenge-title { margin-bottom: 2rem; }
+  .challenge-body { margin-bottom: 3rem; }
+  .challenge-quote {
+    border-left: 3px solid var(--blaze);
+    padding-left: 1.5rem;
+    margin-top: 2rem;
+  }
+  .challenge-quote p {
+    font-size: 1.05rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--deep);
+    line-height: 1.65;
+  }
+  .challenge-quote cite {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    font-style: normal;
+  }
+  .pain-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .pain-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+  }
+  .pain-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blaze);
+    flex-shrink: 0;
+    margin-top: 0.4rem;
+  }
+  .pain-point p {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  .competition-block { margin-top: 1rem; }
+  .comp-row {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+    border: 1px solid var(--light-gray);
+  }
+  .comp-col {
+    padding: 2rem;
+  }
+  .comp-col:first-child {
+    background: var(--white);
+  }
+  .comp-col:last-child {
+    background: var(--deep);
+  }
+  .comp-divider {
+    background: var(--light-gray);
+  }
+  .comp-col-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .comp-col:first-child .comp-col-label { color: var(--blaze); }
+  .comp-col:last-child .comp-col-label { color: var(--blaze); }
+  .comp-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .comp-check {
+    font-size: 0.75rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .comp-check.yes { background: rgba(142, 230, 205, 0.458); color: var(--blue-green); }
+  .comp-check.no { background: rgba(240, 6, 6, 0.462); color: var(--blaze); }
+  .comp-item span {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+  .comp-col:first-child .comp-item span { color: #444; }
+  .comp-col:last-child .comp-item span { color: rgba(255,255,255,0.6); }
+
+  /* ── STRATEGY ── */
+  .strategy {
+    background: var(--white);
+    padding: 8rem 7rem;
+  }
+  .strategy-intro {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+    margin-bottom: 6rem;
+  }
+  .strategy-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--light-gray);
+  }
+  .pillar {
+    padding: 3rem 2.5rem;
+    border-right: 1px solid var(--light-gray);
+    position: relative;
+  }
+  .pillar:last-child { border-right: none; }
+  .pillar-num {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fb86007f;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+  .pillar-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.75rem;
+  }
+  .pillar-body {
+    font-size: 0.82rem;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  /* ── IDENTITY ── */
+  .identity {
+    background: var(--deep);
+    padding: 8rem 7rem;
+    color: var(--white);
+  }
+  .identity .headline-lg { color: var(--white); }
+
+  .logo-showcase {
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .logo-variant {
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+    padding-top: 1rem;
+    padding-bottom: 3.5rem;
+
+  }
+  .lv-white { background: black; }
+  .lv-orange { background: white; }
+  .lv-light { background: var(--sunset); }
+  .logo-mock {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .logo-icon {
+    width: 12rem;
+  }
+  .logo-wordmark {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+  .lv-white .logo-wordmark { color: var(--white); }
+  .lv-orange .logo-wordmark { color: var(--white); }
+  .lv-light .logo-wordmark { color: var(--deep); }
+  .logo-tagline {
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+  .logo-variant-label {
+    position: absolute;
+    bottom: 1rem;
+    left: 1.5rem;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ── COLORS ── */
+  .colors-section {
+    background: var(--white);
+    padding: 8rem 7rem;
+  }
+  .palette-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    height: 220px;
+    margin-top: 4rem;
+    border: 1px solid var(--light-gray);
+  }
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem 1.25rem;
+    position: relative;
+    transition: transform 0.3s ease;
+    cursor: default;
+  }
+  .swatch:hover { transform: translateY(-8px); z-index: 2; }
+  .swatch-name {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .swatch-hex {
+    font-size: 0.7rem;
+    font-weight: 400;
+    font-family: 'Courier New', monospace;
+  }
+  .swatch-role {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+    opacity: 0.65;
+  }
+  .sw-blaze { background: #F26419; }
+  .sw-princeton { background: #FB8500; }
+  .sw-amber { background: #FFB703; }
+  .sw-deep { background: #083046; }
+  .sw-blue-green { background: #219EBC; }
+  .sw-sunset { background: #8ECAE6; }
+  .sw-dark .swatch-name,
+  .sw-dark .swatch-hex,
+  .sw-dark .swatch-role { color: rgba(255,255,255,0.75); }
+  .sw-light .swatch-name,
+  .sw-light .swatch-hex,
+  .sw-light .swatch-role { color: rgba(8,48,70,0.75); }
+
+  .type-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--light-gray);
+    margin-top: 5rem;
+  }
+  .type-col {
+    padding: 3.5rem;
+    border-right: 1px solid var(--light-gray);
+  }
+  .type-col:last-child { border-right: none; }
+  .type-col-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blaze);
+    margin-bottom: 0.25rem;
+  }
+  .type-display-poppins {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--deep);
+    letter-spacing: -0.02em;
+  }
+  .type-display-futura {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--deep);
+    line-height: 1.2;
+  }
+  .type-alphabet {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 1rem;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+  }
+  .type-desc {
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.65;
+    margin-top: 1.5rem;
+  }
+
+  /* ── MOCKUPS ── */
+  .mockups {
+    background: var(--off-white);
+    padding: 8rem 7rem;
+  }
+  .mockup-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 4rem;
+  }
+  .mockup-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 2px;
+  }
+  .mockup-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--light-gray);
+  }
+  .mockup-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+  }
+  .mockup-img.tall { aspect-ratio: 3/4; }
+  .mockup-img.wide { aspect-ratio: 16/7; }
+  .mockup-img.sq { aspect-ratio: 1/1; }
+  .mockup-bg-1 { background: linear-gradient(135deg, #F0EDE8, #E5E0D8); }
+  .mockup-bg-2 { background: linear-gradient(135deg, #083046, #0D4A6B); }
+  .mockup-bg-3 { background: linear-gradient(135deg, #F26419, #FB8500); }
+  .mockup-bg-4 { background: linear-gradient(135deg, #E8F4F8, #CCE8F4); }
+  .mockup-bg-5 { background: linear-gradient(135deg, #1A1A1A, #2D2D2D); }
+  .mockup-bg-6 { background: linear-gradient(135deg, #F8F6F2, #EEEBE4); }
+  .mockup-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.25rem;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mockup-caption-name {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  /* Simulated card mockup */
+  .card-sim {
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .biz-card {
+    width: 280px;
+    padding: 1.5rem;
+    background: white;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .biz-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--blaze), var(--amber));
+  }
+  .biz-card-top {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .biz-logo-icon { width: 28px; height: 28px; }
+  .biz-brand { font-size: 1.1rem; font-weight: 900; color: var(--deep); letter-spacing: 0.05em; }
+  .biz-divider { height: 1px; background: var(--light-gray); }
+  .biz-name { font-size: 0.8rem; font-weight: 700; color: var(--deep); }
+  .biz-role { font-size: 0.65rem; color: var(--mid-gray); letter-spacing: 0.08em; text-transform: uppercase; }
+  .biz-contact { display: flex; flex-direction: column; gap: 0.25rem; }
+  .biz-line { font-size: 0.65rem; color: #888; display: flex; align-items: center; gap: 0.4rem; }
+  .biz-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--blaze); flex-shrink: 0; }
+
+  /* ── WEB SECTION ── */
+  .web-section {
+    background: var(--white);
+    padding: 8rem 7rem;
+  }
+  .web-frame {
+    margin-top: 4rem;
+    border: 1px solid var(--light-gray);
+    overflow: hidden;
+  }
+  .browser-bar {
+    background: #F5F5F5;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .browser-dots { display: flex; gap: 0.4rem; }
+  .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .bd-red { background: #FF5F57; }
+  .bd-yellow { background: #FEBC2E; }
+  .bd-green { background: #28C840; }
+  .browser-url {
+    flex: 1;
+    background: white;
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: #888;
+    font-family: monospace;
+    border: 1px solid #e0e0e0;
+  }
+  .web-content {
+    background: var(--deep);
+    padding: 4rem;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .web-nav-sim {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .web-nav-logo {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 0.1em;
+  }
+  .web-nav-logo span { color: var(--blaze); }
+  .web-nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+  .web-nav-links a {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    pointer-events: none;
+  }
+  .web-hero-text {
+    max-width: 500px;
+  }
+  .web-hero-text h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .web-hero-text h2 span { color: var(--blaze); }
+  .web-hero-text p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+  .web-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--blaze);
+    color: white;
+    padding: 0.9rem 2rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: default;
+    margin-top: 0.5rem;
+  }
+  .web-placeholder-img {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 280px;
+    aspect-ratio: 4/3;
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .web-placeholder-img .placeholder-label { color: rgba(255,255,255,0.2); }
+
+  /* ── SOCIAL ── */
+  .social-section {
+    background: var(--off-white);
+    padding: 8rem 7rem;
+  }
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+  }
+  .social-post {
+    aspect-ratio: 1/1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    cursor: default;
+  }
+  .social-post-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--light-gray);
+  }
+  .sp-1 .social-post-bg { background: linear-gradient(135deg, #083046, #219EBC); }
+  .sp-2 .social-post-bg { background: linear-gradient(135deg, #F26419, #FFB703); }
+  .sp-3 .social-post-bg { background: linear-gradient(135deg, #1a1a1a, #333); }
+  .sp-4 .social-post-bg { background: linear-gradient(135deg, #8ECAE6, #219EBC); }
+  .social-post-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  }
+  .social-post-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .social-post-caption {
+    position: relative;
+    z-index: 2;
+    padding: 1rem;
+  }
+  .social-post-type {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    display: block;
+  }
+  .social-post-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.3;
+  }
+  .social-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 2px;
+  }
+  .social-stat {
+    background: var(--deep);
+    padding: 2rem;
+    text-align: center;
+  }
+  .social-stat-num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 0.25rem;
+  }
+  .social-stat-num .unit { font-size: 1rem; color: var(--blaze); }
+  .social-stat-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── VEHICLES ── */
+  .vehicles-section {
+    background: var(--dark);
+    padding: 8rem 7rem;
+    color: white;
+  }
+  .vehicles-section .headline-lg { color: white; }
+  .vehicle-showcase {
+    margin-top: 4rem;
+  }
+  .vehicle-main {
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: linear-gradient(135deg, #141414, #252525);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .vehicle-label {
+    position: absolute;
+    bottom: 1rem;
+    left: 1.5rem;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+  .veh-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  /* ── MATERIALS ── */
+  .materials-section {
+    background: var(--off-white);
+    padding: 8rem 7rem;
+  }
+  .materials-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--light-gray);
+    margin-top: 4rem;
+  }
+  .material-card {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--light-gray);
+    position: relative;
+  }
+  .material-card:last-child { border-right: none; }
+  .mat-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.5rem;
+  }
+  .mat-spec {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--blaze);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  .mat-desc {
+    font-size: 0.78rem;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  /* ── IMPACT ── */
+  .impact-section {
+    background: var(--white);
+    padding: 8rem 7rem;
+  }
+  .impact-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--light-gray);
+    margin-top: 5rem;
+  }
+  .impact-col {
+    padding: 4rem;
+    border-right: 1px solid var(--light-gray);
+  }
+  .impact-col:last-child { border-right: none; background: var(--deep); }
+  .impact-col-title {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+  .impact-col:first-child .impact-col-title { color: var(--blaze); }
+  .impact-col:last-child .impact-col-title { color: rgba(255,255,255,0.35); }
+  .impact-metric {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .impact-col:last-child .impact-metric { border-bottom-color: rgba(255,255,255,0.08); }
+  .impact-metric:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .impact-value {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--deep);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .impact-col:last-child .impact-value { color: white; }
+  .impact-value .unit { font-size: 1.5rem; color: var(--blaze); }
+  .impact-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--deep);
+    margin-bottom: 0.25rem;
+  }
+  .impact-col:last-child .impact-label { color: rgba(255,255,255,0.7); }
+  .impact-desc {
+    font-size: 0.75rem;
+    color: #aaa;
+    line-height: 1.55;
+  }
+  .impact-col:last-child .impact-desc { color: rgba(255,255,255,0.35); }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: var(--dark);
+    padding: 10rem 7rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(242,100,25,0.1), transparent 70%);
+  }
+  .final-cta-content { position: relative; z-index: 1; }
+  .final-eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blaze);
+    margin-bottom: 2rem;
+    display: block;
+  }
+  .final-title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    color: white;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+  }
+  .final-title .line-2 { color: var(--blaze); display: block; }
+  .final-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin-top: 1rem;
+  }
+  .final-meta-item {
+    text-align: center;
+  }
+  .final-meta-item .label { color: rgba(255,255,255,0.25); display: block; margin-bottom: 0.25rem; }
+  .final-meta-item .value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 2rem 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand {
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.3);
+  }
+  .footer-brand span { color: var(--blaze); }
+  .footer-credits {
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.08em;
+  }
+  .footer-year {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ── UTILITIES ── */
+  .flex-gap-sm { display: flex; align-items: center; gap: 0.5rem; }
+  .orange { color: var(--blaze); }
+  .mt-xs { margin-top: 0.5rem; }
+  .mt-sm { margin-top: 1rem; }
+  .mt-md { margin-top: 2rem; }
+  .mt-lg { margin-top: 3rem; }
+  .mb-lg { margin-bottom: 3rem; }
+  .divider-h {
+    height: 1px;
+    background: var(--light-gray);
+    margin: 3rem 0;
+  }
+
+  /* placeholder inner graphic */
+  .ph-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    height: 100%;
+  }
+  .ph-icon {
+    width: 36px;
+    height: 36px;
+    border: 1.5px dashed currentColor;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.2;
+  }
+  .ph-text {
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.2;
+  }
+
+  @media (max-width: 1100px) {
+    nav { padding: 1.5rem 2.5rem; }
+    .nav-links { display: none; }
+    section, .challenge, .strategy, .identity, .colors-section,
+    .mockups, .web-section, .social-section, .vehicles-section,
+    .materials-section, .workflow-section, .impact-section,
+    .results-section, .final-cta { padding: 5rem 2.5rem; }
+    footer { padding: 2rem 2.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 8rem 2.5rem 3rem; }
+    .hero-right { display: none; }
+    .challenge-grid, .strategy-intro, .comp-row { grid-template-columns: 1fr; }
+    .comp-divider { display: none; }
+    .strategy-pillars { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1px solid var(--light-gray); }
+    .palette-row { grid-template-columns: repeat(3, 1fr); height: auto; }
+    .swatch { aspect-ratio: 1/1; }
+    .type-showcase, .impact-split { grid-template-columns: 1fr; }
+    .type-col, .impact-col { border-right: none; border-bottom: 1px solid var(--light-gray); }
+    .mockup-grid-2, .mockup-grid-3 { grid-template-columns: 1fr; }
+    .social-grid { grid-template-columns: 1fr 1fr; }
+    .social-stats { grid-template-columns: 1fr; }
+    .materials-grid { grid-template-columns: 1fr 1fr; }
+    .material-card:nth-child(2) { border-right: none; }
+    .material-card:nth-child(3) { border-top: 1px solid var(--light-gray); }
+    .material-card:last-child { border-right: none; }
+    .step-tool { display: none; }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+    .result-item:nth-child(2) { border-right: none; }
+    .result-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.12); }
+    .logo-showcase { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; gap: 1.5rem; }
+    .section-number { font-size: 4rem; }
+    .hero-meta { flex-direction: column; gap: 1.5rem; }
+    .web-placeholder-img { display: none; }
+    .web-content { padding: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>L</span>INDJAN</div>
+  <ul class="nav-links">
+    <li><a href="#challenge">El Repte</a></li>
+    <li><a href="#identity">Identitat</a></li>
+    <li><a href="#mockups">Peces</a></li>
+    <li><a href="#impact">Impacte</a></li>
+  </ul>
+  <div class="nav-tag">Case Study</div>
+</nav>
+
+<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
+<section class="hero">
+  <div class="hero-energy-lines"></div>
+  <div class="hero-bg-accent"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Brand Identity &amp; Digital Transformation</span>
+    </div>
+
+    <h1 class="headline-xl hero-title">
+      LIND<span class="accent">JAN</span><br>
+      S.L.
+    </h1>
+
+    <p class="hero-subtitle">
+      De la identitat provisional a la imatge d'una gran corporació energètica. Un cas d'estudi sobre com el disseny estratègic transforma empreses reals.
+    </p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="label">Sector</span>
+        <span class="value">Instal·lacions Energètiques</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Àmbit</span>
+        <span class="value">Catalunya · PIME</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Tipologia</span>
+        <span class="value">Branding + Ecodisseny</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-image-frame">
+      <div class="hero-img-placeholder">
+        <div class="placeholder-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+        </div>
+        <span class="placeholder-label">Hero Mockup</span>
+      </div>
+      <div class="hero-img-badge">
+        <div class="num">2025</div>
+        <div class="sub">Projecte</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span class="label">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ CHALLENGE ══════════════════════════════ -->
+<div id="challenge" class="challenge">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div class="section-title-block">
+      <span class="label section-label">El Problema</span>
+      <h2 class="headline-lg">El diagnòstic:<br>excel·lència tècnica,<br><span class="orange">invisibilitat total</span></h2>
+    </div>
+  </div>
+
+  <div class="challenge-grid">
+    <div class="challenge-text">
+      <div class="challenge-body">
+        <p class="body-lg">Lindjan S.L. és una PIME fundada el 2018 especialitzada en instal·lacions energètiques integrals —calefacció, gas, aire condicionat, tractament d'aigüa, i eficiència energètica. Un equip tècnic d'alta qualificació, però atrapada en una paradoxa greu: mentre els seus serveis eren impecables, la seva presència al mercat era pràcticament inexistent.</p>
+      </div>
+
+      <div class="challenge-quote">
+        <p>"Falta de visibilitat i identitat corporativa clara, limitant el creixement i prestigi de l'empresa."</p>
+        <cite>Josep Jané, Responsable de Lindjan S.L.</cite>
+      </div>
+    </div>
+
+    <div>
+      <div class="competition-block">
+        <span class="label" style="display:block;margin-bottom:1.5rem;">Comparativa de mercat</span>
+        <div class="comp-row">
+          <div class="comp-col">
+            <div class="comp-col-label">Competència</div>
+            <div class="comp-item"><span class="comp-check yes">✓</span><span>Pàgina web activa</span></div>
+            <div class="comp-item"><span class="comp-check yes">✓</span><span>Xarxes socials gestionades</span></div>
+            <div class="comp-item"><span class="comp-check yes">✓</span><span>Imatge corporativa coherent</span></div>
+            <div class="comp-item"><span class="comp-check yes">✓</span><span>Canals digitals de captació</span></div>
+            <div class="comp-item"><span class="comp-check yes">✓</span><span>Presència a Google Maps</span></div>
+          </div>
+          <div class="comp-divider"></div>
+          <div class="comp-col">
+            <div class="comp-col-label">LINDJAN (abans)</div>
+            <div class="comp-item"><span class="comp-check no">✗</span><span style="color:rgba(255,255,255,0.55)">Sense web ni presència digital</span></div>
+            <div class="comp-item"><span class="comp-check no">✗</span><span style="color:rgba(255,255,255,0.55)">Sense xarxes socials</span></div>
+            <div class="comp-item"><span class="comp-check no">✗</span><span style="color:rgba(255,255,255,0.55)">Logotip i imatge provisional</span></div>
+            <div class="comp-item"><span class="comp-check no">✗</span><span style="color:rgba(255,255,255,0.55)">Dependència del boca-orella</span></div>
+            <div class="comp-item"><span class="comp-check no">✗</span><span style="color:rgba(255,255,255,0.55)">Baixa visibilitat davant la competència</span></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ STRATEGY ══════════════════════════════ -->
+<div class="strategy">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div class="section-title-block">
+      <span class="label section-label">L'Estratègia</span>
+      <h2 class="headline-lg">Tres pilars per<br>transformar una<br><span class="orange">PIME en referent</span></h2>
+    </div>
+  </div>
+
+  <div class="strategy-intro">
+    <div></div>
+    <p class="body-lg">La solució no era simplement "fer un logo nou". Calia construir un sistema de comunicació complet que reflectís els valors reals de l'empresa —confiança, rapidesa i qualitat— i que fos sostenible, escalable i econòmicament viable per a una PIME del sector.</p>
+  </div>
+
+  <div class="strategy-pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">Identitat Visual Sistèmica</div>
+      <div class="pillar-body">Creació d'un sistema de marca complet</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">Presència Digital Integral</div>
+      <div class="pillar-body">Disseny de web corporativa, estratègia de XS i integració d'eines digitals</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">Producció Responsable</div>
+      <div class="pillar-body">Materials físics sostenibles</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ IDENTITY ══════════════════════════════ -->
+<div id="identity" class="identity">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div class="section-title-block">
+      <span class="label section-label">Identitat Visual</span>
+      <h2 class="headline-lg">El sistema de marca:<br><span style="color:var(--blaze)">ordre, força</span><br>i confiança</h2>
+    </div>
+  </div>
+
+  <p class="body-lg" style="color:rgba(255,255,255,0.5);max-width:600px;margin-bottom:4rem;">
+    La nova identitat trenca amb la imatge provisional per posicionar Lindjan com una empresa referent del sector energètic. Inspirada en la claredat de grans corporatives com Nedgia o Endesa, la marca transmet ordre tècnic, eficiència i proximitat.
+  </p>
+
+  <div class="logo-showcase">
+    <div class="logo-variant lv-white">
+      <div class="logo-mock">
+        <img src="img/logo_negatiu.svg" alt="Logo Negatiu" class="logo-icon">
+      </div>
+      <span class="logo-variant-label" style="color:rgba(221, 221, 221, 0.737);">Versió Negatiu</span>
+    </div>
+    <div class="logo-variant lv-orange">
+      <div class="logo-mock">
+        <img src="img/logo_positiu.svg" alt="Logo Positiu" class="logo-icon">
+      </div>
+      <span class="logo-variant-label" style="color:rgba(101, 101, 101, 0.771);">Versió Positiu</span>
+    </div>
+    <div class="logo-variant lv-light">
+      <div class="logo-mock">
+        <img src="img/logo_color.svg" alt="Logo Color" class="logo-icon">
+      </div>
+      <span class="logo-variant-label" style="color:rgba(62, 59, 59, 0.861);">Versió Color</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ COLORS ══════════════════════════════ -->
+<div class="colors-section">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <div class="section-title-block">
+      <span class="label section-label">Colors &amp; Tipografia</span>
+      <h2 class="headline-lg">Una paleta que<br>parla d'energia<br><span class="orange">i confiança</span></h2>
+    </div>
+  </div>
+
+  <p class="body-lg" style="max-width:600px;margin-bottom:0;">
+    La selecció cromàtica es basa en una transició estratègica entre tons càlids i freds. Els taronges evoquen l'energia, el gas i l'escalfor, mentre que la gamma de blaus aporta el rigor tècnic i la professionalitat pròpia del sector.
+  </p>
+
+  <div class="palette-row">
+    <div class="swatch sw-blaze sw-dark">
+      <div class="swatch-name">Blaze Orange</div>
+      <div class="swatch-hex">#F26419</div>
+      <div class="swatch-role">Primari · Acció</div>
+    </div>
+    <div class="swatch sw-princeton sw-dark">
+      <div class="swatch-name">Princeton Orange</div>
+      <div class="swatch-hex">#FB8500</div>
+      <div class="swatch-role">Primari · Energia</div>
+    </div>
+    <div class="swatch sw-amber sw-light">
+      <div class="swatch-name">Amber Flame</div>
+      <div class="swatch-hex">#FFB703</div>
+      <div class="swatch-role">Accent · Calor</div>
+    </div>
+    <div class="swatch sw-deep sw-dark">
+      <div class="swatch-name">Deep Space Blue</div>
+      <div class="swatch-hex">#083046</div>
+      <div class="swatch-role">Fons · Rigor</div>
+    </div>
+    <div class="swatch sw-blue-green sw-dark">
+      <div class="swatch-name">Blue Green</div>
+      <div class="swatch-hex">#219EBC</div>
+      <div class="swatch-role">Secundari · Tècnic</div>
+    </div>
+    <div class="swatch sw-sunset sw-light">
+      <div class="swatch-name">Sunset Spectrum</div>
+      <div class="swatch-hex">#8ECAE6</div>
+      <div class="swatch-role">Clar · Aire</div>
+    </div>
+  </div>
+
+  <div class="type-showcase">
+    <div class="type-col">
+      <div class="type-col-label">Titulars</div>
+      <div class="type-display-poppins">Poppins Black</div>
+      <div class="type-alphabet">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ<br>abcdefghijklmnñopqrstuvwxyz<br>0123456789 !@#$&amp;</div>
+      <p class="type-desc">Font geomètrica i amable que reforça la imatge d'empresa innovadora i propera. Ideal per a titulars d'alt impacte en suports digitals i físics.</p>
+    </div>
+    <div class="type-col">
+      <div class="type-col-label">Cos de text</div>
+      <div class="type-display-futura">Futura PT Book</div>
+      <div class="type-alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 !@#$&amp;</div>
+      <p class="type-desc">Tipografia de tall clàssic i funcional que aporta el rigor, la serietat i el caràcter industrial propi del sector de les instal·lacions.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ MOCKUPS ══════════════════════════════ -->
+<div id="mockups" class="mockups">
+  <div class="section-header">
+    <div class="section-number">05</div>
+    <div class="section-title-block">
+      <span class="label section-label">Materials Corporatius</span>
+      <h2 class="headline-lg">Cada peça,<br>un punt de<br><span class="orange">contacte estratègic</span></h2>
+    </div>
+  </div>
+
+  <!-- Targetes de visita -->
+  <div class="mockup-grid-2">
+    <div class="mockup-item">
+      <div class="mockup-img mockup-bg-1 card-sim">
+        <div class="biz-card">
+          <div class="biz-card-top">
+            <svg class="biz-logo-icon" viewBox="0 0 28 28" fill="none">
+              <path d="M14 2L24 8V20L14 26L4 20V8L14 2Z" stroke="#F26419" stroke-width="1.2" fill="none"/>
+              <path d="M14 7L20 10.5V17.5L14 21L8 17.5V10.5L14 7Z" fill="#F26419" opacity="0.25"/>
+              <path d="M14 11L17 12.75V16.25L14 18L11 16.25V12.75L14 11Z" fill="#F26419"/>
+            </svg>
+            <span class="biz-brand">LINDJAN</span>
+          </div>
+          <div class="biz-divider"></div>
+          <div class="biz-name">Verònica Lindner</div>
+          <div class="biz-role">Gestió &amp; Atenció al Client</div>
+          <div class="biz-contact">
+            <div class="biz-line"><div class="biz-dot"></div>+34 629 184 016</div>
+            <div class="biz-line"><div class="biz-dot"></div>lindjan@gmail.com</div>
+            <div class="biz-line"><div class="biz-dot"></div>www.lindjan.com</div>
+          </div>
+        </div>
+      </div>
+      <div class="mockup-caption">
+        <span class="mockup-caption-name">Tríptic informatiu</span>
+      </div>
+    </div>
+    <div class="mockup-item">
+      <div class="mockup-img mockup-bg-2">
+        <div class="ph-inner" style="color:rgba(255,255,255,0.3)">
+          <div class="ph-icon" style="border-color:rgba(255,255,255,0.3)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          </div>
+          <span class="ph-text">Sobre corporatiu</span>
+        </div>
+      </div>
+      <div class="mockup-caption">
+        <span class="mockup-caption-name">Sobre i paper de carta</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup-grid-3">
+    <div class="mockup-item">
+      <div class="mockup-img mockup-bg-3">
+        <div class="ph-inner" style="color:rgba(255,255,255,0.4)">
+          <div class="ph-icon" style="border-color:rgba(255,255,255,0.4)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          </div>
+          <span class="ph-text">Tríptic DL</span>
+        </div>
+      </div>
+      <div class="mockup-caption">
+        <span class="mockup-caption-name">Tríptic de serveis DL</span>
+      </div>
+    </div>
+    <div class="mockup-item">
+      <div class="mockup-img mockup-bg-4">
+        <div class="ph-inner" style="color:rgba(8,48,70,0.35)">
+          <div class="ph-icon" style="border-color:rgba(8,48,70,0.35)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          </div>
+          <span class="ph-text">Pressupost PDF</span>
+        </div>
+      </div>
+      <div class="mockup-caption">
+        <span class="mockup-caption-name">Plantilla de pressupost</span>
+      </div>
+    </div>
+    <div class="mockup-item">
+      <div class="mockup-img mockup-bg-5">
+        <div class="ph-inner" style="color:rgba(255,255,255,0.25)">
+          <div class="ph-icon" style="border-color:rgba(255,255,255,0.25)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          </div>
+          <span class="ph-text">Guia manteniment</span>
+        </div>
+      </div>
+      <div class="mockup-caption">
+        <span class="mockup-caption-name">Guia manteniment eficient</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ WEB ══════════════════════════════ -->
+<div class="web-section">
+  <div class="section-header">
+    <div class="section-number">06</div>
+    <div class="section-title-block">
+      <span class="label section-label">Presència Digital</span>
+      <h2 class="headline-lg">Una web que<br>captura clients<br><span class="orange">les 24h</span></h2>
+    </div>
+  </div>
+
+  <p class="body-lg" style="max-width:600px;margin-bottom:4rem;">
+    La web corporativa de Lindjan respon a la necessitat més urgent detectada: tenir una porta d'entrada professional al negoci. Dissenyada per convertir visites en consultes, amb formulari integrat, Google Maps i portafoli de treballs reals.
+  </p>
+
+  <div class="web-frame">
+    <div class="browser-bar">
+      <div class="browser-dots">
+        <div class="browser-dot bd-red"></div>
+        <div class="browser-dot bd-yellow"></div>
+        <div class="browser-dot bd-green"></div>
+      </div>
+      <div class="browser-url">www.lindjan.com</div>
+    </div>
+    <div class="web-content">
+      <div class="web-nav-sim">
+        <div class="web-nav-logo"><span>L</span>INDJAN</div>
+        <div class="web-nav-links">
+          <a href="#">Serveis</a>
+          <a href="#">Projectes</a>
+          <a href="#">Contacte</a>
+          <a href="#">Blog</a>
+        </div>
+      </div>
+      <div class="web-hero-text">
+        <h2>Instal·lacions<br><span>Energètiques</span><br>de confiança</h2>
+        <p>Calefacció, gas, climatització i eficiència energètica per a empreses i particulars a Catalunya. Pressupost gratuït en 24h.</p>
+        <div class="web-cta">Demana pressupost →</div>
+      </div>
+      <div class="web-placeholder-img">
+        <div class="ph-icon" style="border-color:rgba(255,255,255,0.2)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        </div>
+        <span class="placeholder-label">Foto treballs reals</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SOCIAL ══════════════════════════════ -->
+<div class="social-section">
+  <div class="section-header">
+    <div class="section-number">07</div>
+    <div class="section-title-block">
+      <span class="label section-label">Xarxes Socials</span>
+      <h2 class="headline-lg">Instagram<br>com a<br><span class="orange">carta de presentació</span></h2>
+    </div>
+  </div>
+
+  <div class="social-grid">
+    <div class="social-post sp-1">
+      <div class="social-post-bg"></div>
+      <div class="social-post-overlay"></div>
+      <div class="social-post-placeholder">
+        <div class="ph-icon" style="border-color:rgba(255,255,255,0.25)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        </div>
+      </div>
+      <div class="social-post-caption">
+        <span class="social-post-type">Instal·lació</span>
+        <div class="social-post-title">Nova caldera eficient<br>a Vilanova</div>
+      </div>
+    </div>
+    <div class="social-post sp-2">
+      <div class="social-post-bg"></div>
+      <div class="social-post-overlay"></div>
+      <div class="social-post-placeholder">
+        <div class="ph-icon" style="border-color:rgba(255,255,255,0.3)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        </div>
+      </div>
+      <div class="social-post-caption">
+        <span class="social-post-type">Tip energètic</span>
+        <div class="social-post-title">Redueix fins un 30%<br>la teva factura</div>
+      </div>
+    </div>
+    <div class="social-post sp-3">
+      <div class="social-post-bg"></div>
+      <div class="social-post-overlay"></div>
+      <div class="social-post-placeholder">
+        <div class="ph-icon" style="border-color:rgba(255,255,255,0.2)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        </div>
+      </div>
+      <div class="social-post-caption">
+        <span class="social-post-type">El nostre equip</span>
+        <div class="social-post-title">Professionals<br>a domicili</div>
+      </div>
+    </div>
+    <div class="social-post sp-4">
+      <div class="social-post-bg"></div>
+      <div class="social-post-overlay"></div>
+      <div class="social-post-placeholder">
+        <div class="ph-icon" style="border-color:rgba(8,48,70,0.3)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#083046" stroke-width="1.5" opacity="0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        </div>
+      </div>
+      <div class="social-post-caption">
+        <span class="social-post-type">Ecodisseny</span>
+        <div class="social-post-title">Materials 100%<br>reciclats</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="social-stats">
+    <div class="social-stat">
+      <div class="social-stat-num">90<span class="unit">%</span></div>
+      <div class="social-stat-label">Activitat a Catalunya</div>
+    </div>
+    <div class="social-stat">
+      <div class="social-stat-num">+5<span class="unit">k</span></div>
+      <div class="social-stat-label">Abast estimat 1r any</div>
+    </div>
+    <div class="social-stat">
+      <div class="social-stat-num">3</div>
+      <div class="social-stat-label">Plataformes actives</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ VEHICLES ══════════════════════════════ -->
+<div class="vehicles-section">
+  <div class="section-header">
+    <div class="section-number">08</div>
+    <div class="section-title-block">
+      <span class="label section-label">Retolació de vehicles</span>
+      <h2 class="headline-lg">El vehicle<br>com a<br><span style="color:var(--blaze)">suport mòbil</span></h2>
+    </div>
+  </div>
+
+  <p class="body-lg" style="color:rgba(255,255,255,0.45);max-width:600px;margin-bottom:0;">
+    Cada vehicle de Lindjan és un punt de contacte visual en moviment. La retolació transforma les furgonetes en eines de màrqueting passiu que reforcen la presència de marca en cada trajecte i en cada instal·lació a domicili.
+  </p>
+
+  <div class="vehicle-showcase">
+    <div class="vehicle-main">
+      <div class="ph-inner" style="color:rgba(255,255,255,0.15)">
+        <div class="ph-icon" style="border-color:rgba(255,255,255,0.15)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        </div>
+        <span class="ph-text">Mockup vehicle — Vista lateral</span>
+      </div>
+      <span class="vehicle-label" style="color:rgba(255,255,255,0.18);">Vista lateral furgoneta principal</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ MATERIALS ══════════════════════════════ -->
+<div class="materials-section">
+  <div class="section-header">
+    <div class="section-number">09</div>
+    <div class="section-title-block">
+      <span class="label section-label">Ecodisseny &amp; Sostenibilitat</span>
+      <h2 class="headline-lg">Materials que<br>cuiden el planeta<br><span class="orange">i el negoci</span></h2>
+    </div>
+  </div>
+
+  <div class="materials-grid">
+    <div class="material-card">
+      <div class="mat-title">Paper Nautilus Reciclat</div>
+      <div class="mat-spec">100% Post-consum · 350g</div>
+      <div class="mat-desc">Fabricat amb fibres post-consum, completament biodegradable. Sense recobriment plàstic, 100% reciclable. Per a targetes de visita i dossiers.</div>
+    </div>
+    <div class="material-card">
+      <div class="mat-title">Tintes vegetals d'oli</div>
+      <div class="mat-spec">Soia o lli · Baix VOC</div>
+      <div class="mat-desc">Ús d'olis de soia o lli en lloc de derivats del petroli, facilitant la futura recuperació de la fibra de paper i reduint emissions a l'atmosfera.</div>
+    </div>
+    <div class="material-card">
+      <div class="mat-title">Munken Lynx Rough</div>
+      <div class="mat-spec">FSC Certificat · 90–120g</div>
+      <div class="mat-desc">Paper de procedència forestal responsable per a papeleria corporativa. Textura natural que transmet qualitat sense ser intrusiva.</div>
+    </div>
+    <div class="material-card">
+      <div class="mat-title">Ecodisseny tipogràfic</div>
+      <div class="mat-spec">Fons blanc · Tinta mínima</div>
+      <div class="mat-desc">Maquetació estratègica amb fons blancs dominants i eliminació de plastificats per minimitzar el consum de tinta i assegurar el 100% de reciclabilitat del producte final.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ IMPACT ══════════════════════════════ -->
+<div id="impact" class="impact-section">
+  <div class="section-header">
+    <div class="section-number">11</div>
+    <div class="section-title-block">
+      <span class="label section-label">Impacte Ambiental &amp; Social</span>
+      <h2 class="headline-lg">Disseny responsable,<br>resultat<br><span class="orange">mesurable</span></h2>
+    </div>
+  </div>
+
+  <div class="impact-split">
+    <div class="impact-col">
+      <div class="impact-col-title">Impacte Ambiental</div>
+      <div class="impact-metric">
+        <div class="impact-value">100<span class="unit">%</span></div>
+        <div class="impact-label">Materials reciclables</div>
+        <div class="impact-desc">Tots els impresos del projecte estan dissenyats per ser completament reciclables: paper Nautilus sense plastificats, tintes vegetals sense derivats del petroli.</div>
+      </div>
+      <div class="impact-metric">
+        <div class="impact-value">−<span class="unit">60</span><span style="font-size:1.5rem;color:var(--blaze)">%</span></div>
+        <div class="impact-label">Reducció de paper imprès</div>
+        <div class="impact-desc">La digitalització de pressupostos, contractes i guies de manteniment elimina la impressió de documents transaccionals, reduint significativament el consum de paper.</div>
+      </div>
+      <div class="impact-metric">
+        <div class="impact-value">0</div>
+        <div class="impact-label">Laminats plàstics</div>
+        <div class="impact-desc">Eliminació total de plastificats sintètics, garantint que tots els materials gràfics siguin biodegradables i no contaminin la cadena de reciclatge.</div>
+      </div>
+    </div>
+    <div class="impact-col">
+      <div class="impact-col-title">Impacte Social</div>
+      <div class="impact-metric">
+        <div class="impact-value" style="color:white;">KM<span class="unit">0</span></div>
+        <div class="impact-label" style="color:rgba(255,255,255,0.7);">Cadena de proveïdors local</div>
+        <div class="impact-desc">Tots els proveïdors d'impressió i materials seleccionats estan ubicats a Catalunya, fomentant l'economia local i reduint l'empremta de carboni del transport.</div>
+      </div>
+      <div class="impact-metric">
+        <div class="impact-value" style="color:white;">+3</div>
+        <div class="impact-label" style="color:rgba(255,255,255,0.7);">Nous canals de captació</div>
+        <div class="impact-desc">La nova presència digital obre tres canals de captació de clients inexistents fins ara: web, Instagram i Google Business, democratitzant l'accés a nous mercats.</div>
+      </div>
+      <div class="impact-metric">
+        <div class="impact-value" style="color:white;">1</div>
+        <div class="impact-label" style="color:rgba(255,255,255,0.7);">Manual de marca per al personal</div>
+        <div class="impact-desc">Creació d'un Brand Guidelines simplificat perquè tot el personal pugui generar documents bàsics (albarans, informes) mantenint la nova identitat corporativa.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ FINAL CTA ══════════════════════════════ -->
+<div class="final-cta">
+  <div class="final-cta-content">
+    <span class="final-eyebrow">Projecte completat · 2025</span>
+    <h2 class="final-title">
+      Una empresa tècnica<br>
+      <span class="line-2">ara sembla una gran<br>corporació.</span>
+    </h2>
+    <div class="final-meta">
+      <div class="final-meta-item">
+        <span class="label">Client</span>
+        <span class="value">Lindjan S.L.</span>
+      </div>
+      <div class="final-meta-item">
+        <span class="label">Disseny i gestió</span>
+        <span class="value">Miquela Jané Lindner</span>
+      </div>
+      <div class="final-meta-item">
+        <span class="label">Mòdul</span>
+        <span class="value">1710 — IPO II</span>
+      </div>
+      <div class="final-meta-item">
+        <span class="label">Institut</span>
+        <span class="value">Antoni Algueró</span>
+      </div>
+      <div class="final-meta-item">
+        <span class="label">Any</span>
+        <span class="value">2024–2025</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ FOOTER ══════════════════════════════ -->
+<footer>
+  <div class="footer-brand"><span>L</span>INDJAN — Case Study</div>
+  <div class="footer-credits">Disseny i producció gràfica: Miquela Jané Lindner</div>
+  <div class="footer-year">© 2025</div>
+</footer>
+
+</body>
+</html>
