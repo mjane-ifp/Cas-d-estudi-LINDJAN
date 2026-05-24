@@ -1187,13 +1187,17 @@
 
   /* ── FOOTER ── */
   footer {
-    background: var(--dark);
-    padding: 2rem 7rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  line-height: 0;
+}
+
+footer img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
   .footer-brand {
     font-size: 0.8rem;
     font-weight: 900;
@@ -1717,7 +1721,7 @@
 
 <!-- ══════════════════════════════ FOOTER ══════════════════════════════ -->
 <footer>
-  <div class="footer-brand"></div>
+  <img src="img/footer.png" alt="Footer">
 </footer>
 
 </body>
