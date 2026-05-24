@@ -982,15 +982,10 @@
     inset: 0;
     background: var(--light-gray);
   }
-  .sp-1 .social-post-bg { background: linear-gradient(135deg, #083046, #219EBC); }
-  .sp-2 .social-post-bg { background: linear-gradient(135deg, #F26419, #FFB703); }
-  .sp-3 .social-post-bg { background: linear-gradient(135deg, #1a1a1a, #333); }
-  .sp-4 .social-post-bg { background: linear-gradient(135deg, #8ECAE6, #219EBC); }
-  .social-post-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
-  }
+  .sp-1 .social-post-bg { background: var(--off-white); background-image: url(img/post4.png); background-size: cover;}
+  .sp-2 .social-post-bg { background-image: url(img/post1.png); background-size: cover; }
+  .sp-3 .social-post-bg { background-image: url(img/post2.png); background-size: cover; }
+  .sp-4 .social-post-bg { background-image: url(img/post3.png); background-size: cover; }
   .social-post-placeholder {
     position: absolute;
     inset: 0;
@@ -999,11 +994,6 @@
     justify-content: center;
     flex-direction: column;
     gap: 0.5rem;
-  }
-  .social-post-caption {
-    position: relative;
-    z-index: 2;
-    padding: 1rem;
   }
   .social-post-type {
     font-size: 0.55rem;
@@ -1019,31 +1009,6 @@
     color: white;
     line-height: 1.3;
   }
-  .social-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 2px;
-  }
-  .social-stat {
-    background: var(--deep);
-    padding: 2rem;
-    text-align: center;
-  }
-  .social-stat-num {
-    font-size: 2rem;
-    font-weight: 900;
-    color: white;
-    margin-bottom: 0.25rem;
-  }
-  .social-stat-num .unit { font-size: 1rem; color: var(--blaze); }
-  .social-stat-label {
-    font-size: 0.6rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-  }
 
   /* ── VEHICLES ── */
   .vehicles-section {
@@ -1053,29 +1018,20 @@
   }
   .vehicles-section .headline-lg { color: white; }
   .vehicle-showcase {
-    margin-top: 4rem;
+    margin-top: -14rem;
   }
   .vehicle-main {
     width: 100%;
     aspect-ratio: 16/7;
-    background: linear-gradient(135deg, #141414, #252525);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.06);
+    background-image: url(img/vehicle.png);
+    background-size: cover;
   }
-  .vehicle-label {
-    position: absolute;
-    bottom: 1rem;
-    left: 1.5rem;
-    font-size: 0.58rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
-  }
+  
   .veh-placeholder {
     display: flex;
     flex-direction: column;
@@ -1138,7 +1094,7 @@
   }
   .impact-col:last-child { border-right: none; background: var(--deep); }
   .impact-col-title {
-    font-size: 0.62rem;
+    font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -1640,69 +1596,18 @@
     <div class="social-post sp-1">
       <div class="social-post-bg"></div>
       <div class="social-post-overlay"></div>
-      <div class="social-post-placeholder">
-        <div class="ph-icon" style="border-color:rgba(255,255,255,0.25)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-        </div>
-      </div>
-      <div class="social-post-caption">
-        <span class="social-post-type">Instal·lació</span>
-        <div class="social-post-title">Nova caldera eficient<br>a Vilanova</div>
-      </div>
     </div>
     <div class="social-post sp-2">
       <div class="social-post-bg"></div>
       <div class="social-post-overlay"></div>
-      <div class="social-post-placeholder">
-        <div class="ph-icon" style="border-color:rgba(255,255,255,0.3)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-        </div>
-      </div>
-      <div class="social-post-caption">
-        <span class="social-post-type">Tip energètic</span>
-        <div class="social-post-title">Redueix fins un 30%<br>la teva factura</div>
-      </div>
     </div>
     <div class="social-post sp-3">
       <div class="social-post-bg"></div>
       <div class="social-post-overlay"></div>
-      <div class="social-post-placeholder">
-        <div class="ph-icon" style="border-color:rgba(255,255,255,0.2)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-        </div>
-      </div>
-      <div class="social-post-caption">
-        <span class="social-post-type">El nostre equip</span>
-        <div class="social-post-title">Professionals<br>a domicili</div>
-      </div>
     </div>
     <div class="social-post sp-4">
       <div class="social-post-bg"></div>
       <div class="social-post-overlay"></div>
-      <div class="social-post-placeholder">
-        <div class="ph-icon" style="border-color:rgba(8,48,70,0.3)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#083046" stroke-width="1.5" opacity="0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-        </div>
-      </div>
-      <div class="social-post-caption">
-        <span class="social-post-type">Ecodisseny</span>
-        <div class="social-post-title">Materials 100%<br>reciclats</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="social-stats">
-    <div class="social-stat">
-      <div class="social-stat-num">90<span class="unit">%</span></div>
-      <div class="social-stat-label">Activitat a Catalunya</div>
-    </div>
-    <div class="social-stat">
-      <div class="social-stat-num">+5<span class="unit">k</span></div>
-      <div class="social-stat-label">Abast estimat 1r any</div>
-    </div>
-    <div class="social-stat">
-      <div class="social-stat-num">3</div>
-      <div class="social-stat-label">Plataformes actives</div>
     </div>
   </div>
 </div>
@@ -1722,10 +1627,7 @@
   </p>
 
   <div class="vehicle-showcase">
-    <div class="vehicle-main">
-      
-      <span class="vehicle-label" style="color:rgba(255,255,255,0.18);">Vista lateral furgoneta principal</span>
-    </div>
+    <div class="vehicle-main"></div>
   </div>
 </div>
 
@@ -1777,17 +1679,14 @@
     <div class="impact-col">
       <div class="impact-col-title">Impacte Ambiental</div>
       <div class="impact-metric">
-        <div class="impact-value">100<span class="unit">%</span></div>
         <div class="impact-label">Materials reciclables</div>
         <div class="impact-desc">Tots els impresos del projecte estan dissenyats per ser completament reciclables: paper Nautilus sense plastificats, tintes vegetals sense derivats del petroli.</div>
       </div>
       <div class="impact-metric">
-        <div class="impact-value">−<span class="unit">60</span><span style="font-size:1.5rem;color:var(--blaze)">%</span></div>
         <div class="impact-label">Reducció de paper imprès</div>
         <div class="impact-desc">La digitalització de pressupostos, contractes i guies de manteniment elimina la impressió de documents transaccionals, reduint significativament el consum de paper.</div>
       </div>
       <div class="impact-metric">
-        <div class="impact-value">0</div>
         <div class="impact-label">Laminats plàstics</div>
         <div class="impact-desc">Eliminació total de plastificats sintètics, garantint que tots els materials gràfics siguin biodegradables i no contaminin la cadena de reciclatge.</div>
       </div>
@@ -1795,17 +1694,14 @@
     <div class="impact-col">
       <div class="impact-col-title">Impacte Social</div>
       <div class="impact-metric">
-        <div class="impact-value" style="color:white;">KM<span class="unit">0</span></div>
         <div class="impact-label" style="color:rgba(255,255,255,0.7);">Cadena de proveïdors local</div>
         <div class="impact-desc">Tots els proveïdors d'impressió i materials seleccionats estan ubicats a Catalunya, fomentant l'economia local i reduint l'empremta de carboni del transport.</div>
       </div>
       <div class="impact-metric">
-        <div class="impact-value" style="color:white;">+3</div>
         <div class="impact-label" style="color:rgba(255,255,255,0.7);">Nous canals de captació</div>
         <div class="impact-desc">La nova presència digital obre tres canals de captació de clients inexistents fins ara: web, Instagram i Google Business, democratitzant l'accés a nous mercats.</div>
       </div>
       <div class="impact-metric">
-        <div class="impact-value" style="color:white;">1</div>
         <div class="impact-label" style="color:rgba(255,255,255,0.7);">Manual de marca per al personal</div>
         <div class="impact-desc">Creació d'un Brand Guidelines simplificat perquè tot el personal pugui generar documents bàsics (albarans, informes) mantenint la nova identitat corporativa.</div>
       </div>
