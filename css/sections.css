@@ -86,8 +86,8 @@ section { padding: 8rem 7rem; }
 .mockups { background: var(--off-white); padding: 8rem 7rem; }
 .mockup-grid-2 { display: grid; grid-template-columns: 1fr 1fr; margin-top: 4rem; }
 .mockup-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
-.mockup-item { position: relative; overflow: hidden; background: var(--light-gray); }
-.mockup-img { width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.75rem; position: relative; overflow: hidden; }
+.mockup-item { position: relative; overflow: hidden; background: var(--light-gray); margin: 1rem;}
+.mockup-img { width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.75rem; position: relative; overflow: hidden;}
 .mockup-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .mockup-bg-1, .mockup-bg-2, .mockup-bg-3,
 .mockup-bg-4, .mockup-bg-5, .mockup-bg-6 { background: linear-gradient(135deg, #F0EDE8, #E5E0D8); }
@@ -102,8 +102,15 @@ section { padding: 8rem 7rem; }
 .mockup-caption-2 { background: rgba(0, 67, 115, 0.717); }
 .mockup-caption-3 { background: rgba(210, 109, 2, 0.955); }
 .mockup-caption-4 { background: rgba(0, 147, 176, 0.717); }
-.mockup-caption-5 { background: rgba(184, 123, 0, 0.717); }
+.mockup-caption-5 { background: rgba(211, 166, 76, 0.717); }
 .mockup-caption-name { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
+
+.mockup-bg-1:hover { background: radial-gradient(circle, #F0EDE8, rgba(0, 0, 0, 0.378)); }
+.mockup-bg-2:hover { background: radial-gradient(circle, #F0EDE8, rgba(0, 0, 0, 0.378)); }
+.mockup-bg-3:hover { background: radial-gradient(circle, #F0EDE8, rgba(0, 0, 0, 0.378)); }
+.mockup-bg-4:hover { background: radial-gradient(circle, #F0EDE8, rgba(0, 0, 0, 0.378)); }
+.mockup-bg-5:hover { background: radial-gradient(circle, #F0EDE8, rgba(0, 0, 0, 0.378)); }
+.mockup-bg-6:hover { background: radial-gradient(circle, #F0EDE8, rgba(0, 0, 0, 0.378)); }
 
 /* ── WEB SECTION ── */
 .web-section { background: var(--white); padding: 8rem 7rem 0; }
