@@ -1392,8 +1392,29 @@ footer img {
   }
 
   // Autoplay en silenci (sempre funciona)
-  heroVideo.muted = true;
-  heroVideo.play().then(updateIcon).catch(updateIcon);
+heroVideo.muted = true;
+heroVideo.play().then(updateIcon).catch(updateIcon);
+
+// Para/reprèn segons si la secció hero és visible
+const heroSection = document.querySelector('.hero');
+if (heroSection) {
+  const visibilityObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        // Secció visible → reprèn
+        heroVideo.play().catch(() => {}).finally(updateIcon);
+      } else {
+        // Secció fora de vista → para i silencia
+        heroVideo.pause();
+        heroVideo.muted = true;
+        if (soundOverlay) soundOverlay.classList.remove('hidden');
+        updateIcon();
+      }
+    });
+  }, { threshold: 0.15 });
+
+  visibilityObserver.observe(heroSection);
+}
 
   // Primer clic a l'overlay → activa so
   if (soundOverlay) {
