@@ -40,6 +40,7 @@ nav {
   padding: 0.4rem 1rem;
   border-radius: 2px;
 }
+.nav-tag:hover { background: var(--sunset); }
 .nav-tag a,
 .nav-tag a:active,
 .nav-tag a:focus { color: #fff; text-decoration: none; }
