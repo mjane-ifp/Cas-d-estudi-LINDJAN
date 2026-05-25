@@ -1,0 +1,46 @@
+/* ============================================
+   LINDJAN — css/nav.css
+   ============================================ */
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--light-gray);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+.nav-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--blaze);
+  padding: 0.4rem 1rem;
+  border-radius: 2px;
+}
+.nav-tag a,
+.nav-tag a:active,
+.nav-tag a:focus { color: #fff; text-decoration: none; }
+.nav-tag a:hover { color: var(--deep); text-decoration: none; }

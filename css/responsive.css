@@ -1,0 +1,52 @@
+/* ============================================
+   LINDJAN — css/responsive.css
+   ============================================ */
+
+@media (max-width: 1100px) {
+  nav { padding: 1.5rem 2.5rem; }
+  .nav-links { display: none; }
+
+  section,
+  .challenge, .strategy, .identity, .colors-section,
+  .mockups, .web-section, .social-section, .vehicles-section,
+  .materials-section, .impact-section, .final-cta {
+    padding: 5rem 2.5rem;
+  }
+
+  footer { padding: 2rem 2.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+
+  .hero { grid-template-columns: 1fr; }
+
+  .challenge-grid,
+  .strategy-intro,
+  .comp-row { grid-template-columns: 1fr; }
+  .comp-divider { display: none; }
+
+  .strategy-pillars { grid-template-columns: 1fr; }
+  .pillar { border-right: none; border-bottom: 1px solid var(--light-gray); }
+
+  .palette-row { grid-template-columns: repeat(3, 1fr); height: auto; }
+  .swatch { aspect-ratio: 1/1; }
+
+  .type-showcase,
+  .impact-split { grid-template-columns: 1fr; }
+  .type-col,
+  .impact-col { border-right: none; border-bottom: 1px solid var(--light-gray); }
+
+  .mockup-grid-2,
+  .mockup-grid-3 { grid-template-columns: 1fr; }
+
+  .social-grid { grid-template-columns: 1fr 1fr; }
+
+  .materials-grid { grid-template-columns: 1fr 1fr; }
+  .material-card:nth-child(2) { border-right: none; }
+  .material-card:nth-child(3) { border-top: 1px solid var(--light-gray); }
+  .material-card:last-child { border-right: none; }
+
+  .logo-showcase { grid-template-columns: 1fr; }
+
+  .section-header { flex-direction: column; gap: 1.5rem; }
+  .section-number { font-size: 4rem; }
+
+  .web-section { padding-bottom: 0; }
+}
