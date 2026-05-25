@@ -39,7 +39,7 @@ section { padding: 8rem 7rem; }
 .strategy-intro { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start; margin-bottom: 6rem; }
 .strategy-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--light-gray); }
 .pillar { padding: 3rem 2.5rem; border-right: 1px solid var(--light-gray); position: relative; }
-.pillar:last-child { border-right: none; }
+.pillar:hover {border: 1px solid var(--sunset);}
 .pillar-num { font-size: 3.5rem; font-weight: 900; color: #fb86007f; line-height: 1; margin-bottom: 1.5rem; }
 .pillar-title { font-size: 1rem; font-weight: 700; color: var(--deep); margin-bottom: 0.75rem; }
 .pillar-body { font-size: 0.82rem; color: #888; line-height: 1.6; }
@@ -55,6 +55,7 @@ section { padding: 8rem 7rem; }
 .logo-mock { display: flex; align-items: center; gap: 0.75rem; }
 .logo-icon { width: 12rem; }
 .logo-variant-label { position: absolute; bottom: 1rem; left: 1.5rem; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+.logo-icon:hover { width: 14rem; }
 
 /* ── COLORS & TYPOGRAPHY ── */
 .colors-section { background: var(--white); padding: 8rem 7rem; }
