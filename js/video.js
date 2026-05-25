@@ -84,3 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
   heroVideo.addEventListener('play', updateIcon);
   heroVideo.addEventListener('pause', updateIcon);
 });
+
+document.addEventListener('wheel', e => { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
+document.addEventListener('gesturestart', e => e.preventDefault());
