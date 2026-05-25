@@ -1339,6 +1339,42 @@ footer img {
     .web-placeholder-img { display: none; }
     .web-content { padding: 2.5rem; }
   }
+
+  .sound-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding-left: 2.5rem;
+  padding-bottom: 2.5rem;
+  cursor: pointer;
+  background: transparent;
+}
+.sound-overlay-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  padding: 0.85rem 1.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.97); }
+}
+.sound-overlay.hidden {
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -1346,94 +1382,66 @@ footer img {
 <!-- SCRIPT PARA CONTROLAR EL AUDIO DEL VIDEO Y ELS CONTROLS -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const heroVideo = document.querySelector('.hero-video');
-    const heroSection = document.querySelector('.hero');
-    const playBtn = document.querySelector('.hero-play-btn');
-    const restartBtn = document.querySelector('.hero-restart-btn');
-    if (!heroVideo || !heroSection) return;
+  const heroVideo   = document.querySelector('.hero-video');
+  const playBtn     = document.querySelector('.hero-play-btn');
+  const restartBtn  = document.querySelector('.hero-restart-btn');
+  const soundOverlay = document.getElementById('soundOverlay');
+  if (!heroVideo) return;
 
-    heroVideo.muted = true;
-    heroVideo.playsInline = true;
-    heroVideo.loop = true;
-    heroVideo.autoplay = true;
-    heroVideo.preload = 'auto';
-    heroVideo.volume = 1;
+  const SVG_PLAY  = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3v18l15-9L5 3z"/></svg>';
+  const SVG_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
 
-    const SVG_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">\n        <path d="M5 3v18l15-9L5 3z" />\n      </svg>';
-    const SVG_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">\n        <path d="M6 4h4v16H6zM14 4h4v16h-4z" />\n      </svg>';
+  function updateIcon() {
+    if (playBtn) playBtn.innerHTML = heroVideo.paused ? SVG_PLAY : SVG_PAUSE;
+  }
 
-    function updatePlayIcon() {
-      if (!playBtn) return;
-      playBtn.innerHTML = heroVideo.paused ? SVG_PLAY : SVG_PAUSE;
-    }
+  function enableSound() {
+    heroVideo.muted = false;
+    heroVideo.play().catch(() => { heroVideo.muted = true; });
+    if (soundOverlay) soundOverlay.classList.add('hidden');
+    updateIcon();
+  }
 
-    function enterHero() {
-      // Try to start muted playback and then unmute if allowed
-      heroVideo.muted = true;
-      heroVideo.play().then(function() {
-        // Try unmuting
+  // Autoplay en silenci (sempre funciona)
+  heroVideo.muted = true;
+  heroVideo.play().then(updateIcon).catch(updateIcon);
+
+  // Primer clic a l'overlay → activa so
+  if (soundOverlay) {
+    soundOverlay.addEventListener('click', enableSound);
+  }
+
+  // Botó play/pause
+  if (playBtn) {
+    playBtn.addEventListener('click', function() {
+      if (heroVideo.paused) {
         heroVideo.muted = false;
-        heroVideo.play().catch(function() {
-          // still blocked; keep muted
-          heroVideo.muted = true;
-        });
-      }).catch(function() {
-        // autoplay blocked; keep muted and paused
-        heroVideo.muted = true;
-      }).finally(updatePlayIcon);
-    }
+        heroVideo.play()
+          .catch(() => { heroVideo.muted = true; })
+          .finally(updateIcon);
+        if (soundOverlay) soundOverlay.classList.add('hidden');
+      } else {
+        heroVideo.pause();
+        updateIcon();
+      }
+    });
+  }
 
-    function leaveHero() {
-      heroVideo.pause();
-      heroVideo.muted = true;
-      updatePlayIcon();
-    }
+  // Botó reiniciar
+  if (restartBtn) {
+    restartBtn.addEventListener('click', function() {
+      heroVideo.currentTime = 0;
+      heroVideo.muted = false;
+      heroVideo.play()
+        .catch(() => { heroVideo.muted = true; })
+        .finally(updateIcon);
+      if (soundOverlay) soundOverlay.classList.add('hidden');
+    });
+  }
 
-    // Intersection observer to start/stop when section visible
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) enterHero(); else leaveHero();
-      });
-    }, { threshold: 0.5 });
-
-    observer.observe(heroSection);
-
-    // Play/pause button
-    if (playBtn) {
-      playBtn.addEventListener('click', function() {
-        if (heroVideo.paused) {
-          heroVideo.muted = false;
-          heroVideo.play().catch(function() {
-            heroVideo.muted = true;
-          }).finally(updatePlayIcon);
-        } else {
-          heroVideo.pause();
-          updatePlayIcon();
-        }
-      });
-    }
-
-    // Restart button
-    if (restartBtn) {
-      restartBtn.addEventListener('click', function() {
-        try {
-          heroVideo.currentTime = 0;
-        } catch (e) {}
-        heroVideo.muted = false;
-        heroVideo.play().catch(function() {
-          heroVideo.muted = true;
-        }).finally(updatePlayIcon);
-      });
-    }
-
-    // keep icon in sync
-    heroVideo.addEventListener('play', updatePlayIcon);
-    heroVideo.addEventListener('pause', updatePlayIcon);
-
-    // Initial state
-    const rect = heroSection.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) enterHero(); else leaveHero();
-  });
+  heroVideo.addEventListener('play', updateIcon);
+  heroVideo.addEventListener('pause', updateIcon);
+});
 </script>
 
 <!-- NAV -->
@@ -1454,7 +1462,7 @@ footer img {
     <source src="img/presentacio.MOV" type="video/quicktime">
     El teu navegador no suporta vídeo.
   </video>
-
+  
   <div class="hero-controls" aria-hidden="false">
     <button class="hero-btn hero-play-btn" aria-label="Reprodueix / Pausa">
       <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -1492,6 +1500,19 @@ footer img {
     <span class="label">Scroll</span>
     <div class="scroll-line"></div>
   </div>
+
+  <!-- Overlay so -->
+<div class="sound-overlay" id="soundOverlay">
+  <div class="sound-overlay-inner">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+    </svg>
+    <span>Clica per activar el so</span>
+  </div>
+</div>
+
 </section>
 
 <!-- ══════════════════════════════ CHALLENGE ══════════════════════════════ -->
