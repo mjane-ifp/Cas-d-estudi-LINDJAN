@@ -125,12 +125,20 @@
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
-    background: var(--deep);
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: relative;
     overflow: hidden;
     padding-top: 80px;
+  }
+  .hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
   }
 
   .hero-energy-lines {
@@ -138,6 +146,7 @@
     inset: 0;
     pointer-events: none;
     overflow: hidden;
+    z-index: 3;
   }
   .hero-energy-lines::before {
     content: '';
@@ -170,6 +179,7 @@
     height: 120%;
     background: linear-gradient(135deg, rgba(242,100,25,0.12) 0%, rgba(33,158,188,0.08) 100%);
     clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+    z-index: 1;
   }
 
   .hero-left {
@@ -178,7 +188,7 @@
     justify-content: center;
     padding: 6rem 4rem 6rem 7rem;
     position: relative;
-    z-index: 2;
+    z-index: 4;
   }
   .hero-eyebrow {
     display: flex;
@@ -229,7 +239,7 @@
     justify-content: center;
     padding: 6rem 5rem 6rem 2rem;
     position: relative;
-    z-index: 2;
+    z-index: 4;
   }
   .hero-image-frame {
     width: 100%;
@@ -318,6 +328,39 @@
     background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
     animation: scrollPulse 2s ease-in-out infinite;
   }
+
+  /* Hero controls (play/pause + restart) */
+  .hero-controls {
+    position: absolute;
+    right: 2.5rem;
+    bottom: 2.5rem;
+    display: flex;
+    gap: 0.75rem;
+    z-index: 6;
+  }
+  .hero-btn {
+    width: 52px;
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    background: #219dbc6f;
+    border-radius: 100%;
+    color: white;
+    cursor: pointer;
+    transition: all 160ms ease;
+  }
+  .hero-btn:hover {
+    background: var(--blaze);
+    color: var(--deep);
+    transform: translateY(-2px);
+  }
+  .hero-btn svg { width: 22px; height: 22px; display: block; }
+
+  /* hero sound button removed per user preference; autoplay-with-sound will be attempted when visible */
   @keyframes scrollPulse {
     0%, 100% { transform: scaleY(1); opacity: 1; }
     50% { transform: scaleY(0.6); opacity: 0.4; }
@@ -1300,6 +1343,99 @@ footer img {
 </head>
 <body>
 
+<!-- SCRIPT PARA CONTROLAR EL AUDIO DEL VIDEO Y ELS CONTROLS -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const heroVideo = document.querySelector('.hero-video');
+    const heroSection = document.querySelector('.hero');
+    const playBtn = document.querySelector('.hero-play-btn');
+    const restartBtn = document.querySelector('.hero-restart-btn');
+    if (!heroVideo || !heroSection) return;
+
+    heroVideo.muted = true;
+    heroVideo.playsInline = true;
+    heroVideo.loop = true;
+    heroVideo.autoplay = true;
+    heroVideo.preload = 'auto';
+    heroVideo.volume = 1;
+
+    const SVG_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">\n        <path d="M5 3v18l15-9L5 3z" />\n      </svg>';
+    const SVG_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">\n        <path d="M6 4h4v16H6zM14 4h4v16h-4z" />\n      </svg>';
+
+    function updatePlayIcon() {
+      if (!playBtn) return;
+      playBtn.innerHTML = heroVideo.paused ? SVG_PLAY : SVG_PAUSE;
+    }
+
+    function enterHero() {
+      // Try to start muted playback and then unmute if allowed
+      heroVideo.muted = true;
+      heroVideo.play().then(function() {
+        // Try unmuting
+        heroVideo.muted = false;
+        heroVideo.play().catch(function() {
+          // still blocked; keep muted
+          heroVideo.muted = true;
+        });
+      }).catch(function() {
+        // autoplay blocked; keep muted and paused
+        heroVideo.muted = true;
+      }).finally(updatePlayIcon);
+    }
+
+    function leaveHero() {
+      heroVideo.pause();
+      heroVideo.muted = true;
+      updatePlayIcon();
+    }
+
+    // Intersection observer to start/stop when section visible
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) enterHero(); else leaveHero();
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(heroSection);
+
+    // Play/pause button
+    if (playBtn) {
+      playBtn.addEventListener('click', function() {
+        if (heroVideo.paused) {
+          heroVideo.muted = false;
+          heroVideo.play().catch(function() {
+            heroVideo.muted = true;
+          }).finally(updatePlayIcon);
+        } else {
+          heroVideo.pause();
+          updatePlayIcon();
+        }
+      });
+    }
+
+    // Restart button
+    if (restartBtn) {
+      restartBtn.addEventListener('click', function() {
+        try {
+          heroVideo.currentTime = 0;
+        } catch (e) {}
+        heroVideo.muted = false;
+        heroVideo.play().catch(function() {
+          heroVideo.muted = true;
+        }).finally(updatePlayIcon);
+      });
+    }
+
+    // keep icon in sync
+    heroVideo.addEventListener('play', updatePlayIcon);
+    heroVideo.addEventListener('pause', updatePlayIcon);
+
+    // Initial state
+    const rect = heroSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) enterHero(); else leaveHero();
+  });
+</script>
+
 <!-- NAV -->
 <nav>
   <ul class="nav-links">
@@ -1313,7 +1449,45 @@ footer img {
 
 <!-- ══════════════════════════════ HERO ══════════════════════════════ -->
 <section class="hero">
-<h2 style="color: white;">posar video defensa</h2>
+  <video autoplay muted loop playsinline class="hero-video">
+    <source src="img/presentacio.mp4" type="video/mp4">
+    <source src="img/presentacio.MOV" type="video/quicktime">
+    El teu navegador no suporta vídeo.
+  </video>
+
+  <div class="hero-controls" aria-hidden="false">
+    <button class="hero-btn hero-play-btn" aria-label="Reprodueix / Pausa">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 3v18l15-9L5 3z" />
+      </svg>
+    </button>
+    <button class="hero-btn hero-restart-btn" aria-label="Reproduir des del principi">
+  <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <!-- Arc circular -->
+    <path
+      d="M432 256A176 176 0 1 1 400 152"
+      stroke="currentColor"
+      stroke-width="40"
+      stroke-linecap="round"
+    />
+
+    <!-- Fletxa -->
+    <path
+      d="M336 152L432 152L432 56"
+      stroke="currentColor"
+      stroke-width="40"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+  </svg>
+</button>
+  </div>
+
+  <div class="hero-energy-lines"></div>
+  <div class="hero-bg-accent"></div>
+  <h2 style="color: white;"></h2>
   <div class="hero-scroll-hint">
     <span class="label">Scroll</span>
     <div class="scroll-line"></div>
